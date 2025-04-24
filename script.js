@@ -11,6 +11,7 @@ function canvasSize(size) {
   let height = size;
   for (let i = 0; i < width; i++) {
     let newRow = document.createElement("div");
+    // newRow.style.cssText = "background-color: black;";
     newRow.classList.add("row");
     canvas.appendChild(newRow);
 
@@ -23,3 +24,22 @@ function canvasSize(size) {
     }
   }
 }
+
+// click & hold to draw
+let clicked = false;
+canvas.addEventListener("mousedown", () => {
+  clicked = true;
+});
+canvas.addEventListener("mouseup", () => {
+  clicked = false;
+});
+canvas.addEventListener("mouseleave", () => {
+  clicked = false;
+});
+
+canvas.addEventListener("mousemove", (e) => {
+  if (!clicked) {
+    return;
+  }
+  e.target.style.cssText = "background-color: black;";
+});
