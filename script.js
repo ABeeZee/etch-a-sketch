@@ -1,4 +1,4 @@
-// create 16 x 16 grid of square divs
+// create default 16 x 16 grid of square divs
 const container = document.querySelector(".container");
 const canvas = document.querySelector("#canvas");
 
@@ -24,6 +24,19 @@ function canvasSize(size) {
     }
   }
 }
+
+// change canvas size
+const sizeSlider = document.querySelector("#sizeSlider");
+const sizeInput = document.querySelector("#sizeInput");
+
+function syncInputs(e) {
+  const value = e.target.value;
+  sizeSlider.value = value;
+  sizeInput.value = value;
+}
+
+sizeSlider.addEventListener("input", syncInputs);
+sizeInput.addEventListener("input", syncInputs);
 
 // click & hold to draw
 let clicked = false;
