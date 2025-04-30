@@ -1,14 +1,33 @@
-// create default 16 x 16 grid of square divs
-const container = document.querySelector(".container");
-const canvas = document.querySelector("#canvas");
+// change canvas size
+const container = document.getElementsByClassName("container");
+const canvas = document.getElementById("canvas");
+const sizeSlider = document.getElementById("sizeSlider");
+const sizeInput = document.getElementById("sizeInput");
 
-const MIN_SIZE = 16;
+let syncInputs = function (e) {
+  size = e.target.value;
+  sizeSlider.value = size;
+  sizeInput.value = size;
+};
 
-canvasSize(MIN_SIZE);
+sizeSlider.addEventListener("input", syncInputs);
+sizeInput.addEventListener("input", syncInputs);
+
+sizeSlider.oninput = function () {
+  canvasSize(this.value);
+};
+
+sizeInput.oninput = function () {
+  canvasSize(this.value);
+};
+
+canvasSize(16);
 
 function canvasSize(size) {
+  canvas.innerHTML = "";
   let width = size;
   let height = size;
+
   for (let i = 0; i < width; i++) {
     let newRow = document.createElement("div");
     // newRow.style.cssText = "background-color: black;";
@@ -24,19 +43,6 @@ function canvasSize(size) {
     }
   }
 }
-
-// change canvas size
-const sizeSlider = document.querySelector("#sizeSlider");
-const sizeInput = document.querySelector("#sizeInput");
-
-function syncInputs(e) {
-  const value = e.target.value;
-  sizeSlider.value = value;
-  sizeInput.value = value;
-}
-
-sizeSlider.addEventListener("input", syncInputs);
-sizeInput.addEventListener("input", syncInputs);
 
 // click & hold to draw
 let clicked = false;
