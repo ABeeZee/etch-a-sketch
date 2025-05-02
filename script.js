@@ -62,3 +62,19 @@ canvas.addEventListener("mousemove", (e) => {
   }
   e.target.style.cssText = "background-color: black;";
 });
+
+// clear canvas btn
+const clearBtn = document.getElementById("clearBtn");
+
+clearBtn.addEventListener("click", () => {
+  let grid = canvas.querySelectorAll("div");
+  let column = canvas.querySelectorAll(".column");
+  grid.forEach((div) => {
+    div.style.backgroundColor = "white";
+  });
+  column.forEach((div) => {
+    div.style.cssText =
+      "border-color: lightgray; border-style: solid; border-width: .25px";
+  });
+});
+// ^^establishing something globally will pull from global presets, this is why "grid" and "column" need to be established inside the scope of the btn instead of outside
