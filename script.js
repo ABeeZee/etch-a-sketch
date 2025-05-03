@@ -45,7 +45,12 @@ function canvasSize(size) {
 }
 
 // click & hold to draw
+
+const drawCheckbox = document.getElementById("draw");
+const eraseCheckbox = document.getElementById("erase");
+
 let clicked = false;
+
 canvas.addEventListener("mousedown", () => {
   clicked = true;
 });
@@ -60,7 +65,11 @@ canvas.addEventListener("mousemove", (e) => {
   if (!clicked) {
     return;
   }
-  e.target.style.cssText = "background-color: black;";
+  if (drawCheckbox.checked == true) {
+    e.target.style.cssText = "background-color: black;";
+  } else if (eraseCheckbox.checked == true) {
+    e.target.style.cssText = "background-color: white;";
+  }
 });
 
 // clear canvas btn
