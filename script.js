@@ -15,10 +15,12 @@ sizeInput.addEventListener("input", syncInputs);
 
 sizeSlider.oninput = function () {
   canvasSize(this.value);
+  toggleGrid();
 };
 
 sizeInput.oninput = function () {
   canvasSize(this.value);
+  toggleGrid();
 };
 
 canvasSize(16);
@@ -30,22 +32,38 @@ function canvasSize(size) {
 
   for (let i = 0; i < width; i++) {
     let newRow = document.createElement("div");
-    // newRow.style.cssText = "background-color: black;";
     newRow.classList.add("row");
     canvas.appendChild(newRow);
 
     for (let i = 0; i < height; i++) {
       let newColumn = document.createElement("div");
       newColumn.classList.add("column");
-      newColumn.style.cssText =
-        "border-color: lightgray; border-style: solid; border-width: .25px";
       newRow.appendChild(newColumn);
     }
   }
 }
 
-// click & hold to draw
+// show/hide grid
+const toggleGridCheckbox = document.getElementById("toggleGrid");
 
+function toggleGrid() {
+  let column = canvas.querySelectorAll(".column");
+
+  if (toggleGridCheckbox.checked == true) {
+    column.forEach((div) => {
+      div.classList.remove("noGrid");
+      div.classList.add("grid");
+    });
+  } else if (toggleGridCheckbox.checked == false) {
+    column.forEach((div) => {
+      div.classList.add("noGrid");
+    });
+  }
+}
+
+toggleGridCheckbox.addEventListener("click", toggleGrid);
+
+// click & hold to draw
 const drawCheckbox = document.getElementById("draw");
 const eraseCheckbox = document.getElementById("erase");
 
@@ -76,14 +94,9 @@ canvas.addEventListener("mousemove", (e) => {
 const clearBtn = document.getElementById("clearBtn");
 
 clearBtn.addEventListener("click", () => {
-  let grid = canvas.querySelectorAll("div");
-  let column = canvas.querySelectorAll(".column");
-  grid.forEach((div) => {
+  let pixel = canvas.querySelectorAll("div");
+  pixel.forEach((div) => {
     div.style.backgroundColor = "white";
-  });
-  column.forEach((div) => {
-    div.style.cssText =
-      "border-color: lightgray; border-style: solid; border-width: .25px";
   });
 });
 // ^^establishing something globally will pull from global presets, this is why "grid" and "column" need to be established inside the scope of the btn instead of outside

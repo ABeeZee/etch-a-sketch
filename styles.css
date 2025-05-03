@@ -26,3 +26,13 @@
     display: flex;
     flex: 1;
 }
+
+.grid {
+    border-color: lightgray; 
+    border-style: solid; 
+    border-width: .25px;
+}
+
+.noGrid {
+    border: none;
+}
