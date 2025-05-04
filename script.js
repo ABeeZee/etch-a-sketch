@@ -63,6 +63,15 @@ function toggleGrid() {
 
 toggleGridCheckbox.addEventListener("click", toggleGrid);
 
+// color picker
+let pickColor = document.getElementById("pickColor");
+
+function changeColor(color) {
+  color = pickColor.value;
+}
+
+pickColor.addEventListener("input", changeColor);
+
 // click & hold to draw
 const drawCheckbox = document.getElementById("draw");
 const eraseCheckbox = document.getElementById("erase");
@@ -84,7 +93,7 @@ canvas.addEventListener("mousemove", (e) => {
     return;
   }
   if (drawCheckbox.checked == true) {
-    e.target.style.cssText = "background-color: black;";
+    e.target.style.backgroundColor = pickColor.value;
   } else if (eraseCheckbox.checked == true) {
     e.target.style.cssText = "background-color: white;";
   }
